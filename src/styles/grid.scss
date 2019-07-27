@@ -1,3 +1,4 @@
+@import "./variables.scss";
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -9,10 +10,32 @@
   }
 }
 
-.template-grid {
-  display: grid;
-  grid-template-columns: 300px auto;
-  height: 100vh;
+.toggle-menu {
+  display: none;
+}
+
+@media screen and (max-width: $sm - 1) {
+  .mobile-menu {
+    position: absolute;
+    height: 100%;
+    z-index: 9;
+    left: -100%;
+    transition: left 0.3s ease;
+    &-actived {
+      left: 0%;
+    }
+  }
+  .toggle-menu {
+    display: block;
+  }
+}
+
+@media screen and (min-width: $sm) {
+  .template-grid {
+    display: grid;
+    grid-template-columns: 300px auto;
+    height: 100vh;
+  }
 }
 
 /* Função que gera as classes, recebe dois parâmetros;

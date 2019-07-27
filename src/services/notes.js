@@ -1,15 +1,23 @@
 import { RequestFactory } from "./config";
+import { getAuth } from "./localStorage";
 
 export const getSingleNote = async _id => {
-  return await RequestFactory(`list-note?_id=${_id}`);
+  const { userid } = getAuth();
+  return await RequestFactory(`list-note?_id=${_id}&userid=${userid}`);
 };
 
 export const getAllNotes = async () => {
-  return await RequestFactory("list-all-notes");
+  const { userid } = getAuth();
+  return await RequestFactory(`list-all-notes?userid=${userid}`);
 };
 
 export const addNote = async params => {
-  return await RequestFactory(`add-note`, params, "post");
+  const { userid } = getAuth();
+  return await RequestFactory(
+    `add-note`,
+    { ...params, userID: userid },
+    "post"
+  );
 };
 
 export const updateNote = async params => {
