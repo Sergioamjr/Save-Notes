@@ -181,10 +181,6 @@
 }
 
 .background {
-  &-imaged {
-    background-position: center;
-    background-size: cover;
-  }
   &-dark {
     background: $black;
   }
@@ -220,6 +216,9 @@
   }
   &-theme {
     background: $theme;
+  }
+  &-themeDark {
+    background: $themeDark;
   }
 }
 
@@ -332,17 +331,8 @@
 }
 
 .min-w {
-  &-350 {
+  &-310 {
     min-width: 350px;
-  }
-  &-900 {
-    min-width: 900px;
-  }
-  &-100 {
-    min-width: 100px;
-  }
-  &-140 {
-    min-width: 140px;
   }
 }
 

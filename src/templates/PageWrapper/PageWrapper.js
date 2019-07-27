@@ -6,9 +6,9 @@ import Notes from "../../containers/Notes";
 const PageWrapper = ({ children, hasFoundNote }) => {
   return (
     <div>
-      <div className="template-grid">
+      <div className="template-grid overflow-hidden">
         <Notes Component={Sidebar} />
-        <div className="p-20">
+        <div className="p-20 overflow-auto">
           <Notes Component={TopMenu} hasFoundNote={hasFoundNote} />
           {children}
         </div>

@@ -9,6 +9,7 @@ import createHashSource from "hash-source";
 import PageWrapper from "../templates/PageWrapper";
 import { connect } from "react-redux";
 import { fetchNotesAndUpdateStore } from "../utils/app";
+import Feedback from "../components/Feedback/Feedback";
 
 let source = createHashSource();
 export let history = createHistory(source);
@@ -19,7 +20,7 @@ const SingleDocument = lazy(() => import("./../pages/SingleDocument"));
 
 const Loading = () => (
   <PageWrapper>
-    <p>Loading</p>
+    <Feedback />
   </PageWrapper>
 );
 

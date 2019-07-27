@@ -14,6 +14,7 @@ import {
   getAndUpdateTitle,
   fetchNotesAndUpdateStore
 } from "../../utils/app";
+import Feedback from "../../components/Feedback";
 
 class SingleDocument extends React.Component {
   state = {
@@ -57,6 +58,7 @@ class SingleDocument extends React.Component {
         this.setState({
           note: {}
         });
+        // this.props.dispatch(SetQueryingAsFalse());
         this.props.dispatch(SetSwitchAsTrue());
       }
       const [note] = formatNote([response]);
@@ -103,7 +105,9 @@ class SingleDocument extends React.Component {
             <TextEditor onChange={this.onChange} data={data} />
           )}
 
-          {!data && !this.state.isQuering && <p>Documento não encontrado.</p>}
+          {!data && !this.state.isQuering && this.props.notes.canSwitchNote && (
+            <Feedback text=" Documento não encontrado." mood="sad" />
+          )}
         </div>
       </PageWrapper>
     );
