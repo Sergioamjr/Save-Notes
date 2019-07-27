@@ -1,4 +1,4 @@
-import { RequestFactory, RequestFactoryWithParams } from "./config";
+import { RequestFactory } from "./config";
 
 export const getSingleNote = async _id => {
   return await RequestFactory(`list-note?_id=${_id}`);
@@ -13,9 +13,9 @@ export const addNote = async params => {
 };
 
 export const updateNote = async params => {
-  return await RequestFactoryWithParams(`update-note`, { params }, "patch");
+  return await RequestFactory(`update-note`, { params }, "patch");
 };
 
 export const deleteSingleNote = async _id => {
-  return await RequestFactoryWithParams(`delete-note?_id=${_id}`, {}, "delete");
+  return await RequestFactory(`delete-note?_id=${_id}`, {}, "delete");
 };

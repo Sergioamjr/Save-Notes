@@ -27,23 +27,3 @@ export const RequestFactory = async (endpoint, params = {}, method = "get") => {
     .then(response => formatResponse(response))
     .catch(catchError);
 };
-
-export const RequestFactoryWithParams = (
-  baseURL: string,
-  data: any,
-  method = "post"
-) => {
-  console.log("post", method);
-  return axios
-    .create({
-      baseURL: `${BACKEND}/${baseURL}`,
-      method: method.toUpperCase(),
-      data,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })()
-    .then(response => formatResponse(response))
-    .catch(catchError);
-};

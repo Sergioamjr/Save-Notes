@@ -1,15 +1,18 @@
 import React from "react";
 import Button from "../Button/Button";
-import { RemoveNoteFromList } from "../../store/notes/index";
 import { history } from "../../routes/Routes";
+import { deleteSingleNote } from "../../services/notes";
+import _get from "lodash/get";
+import { fetchNotesAndUpdateStore } from "../../utils/app";
 
 const TopMenu = props => {
-  const removeItemHandler = () => {
-    const {
-      notes: { selectedId }
-    } = props;
-    props.dispatch(RemoveNoteFromList(selectedId));
-    history.navigate("/");
+  const removeItemHandler = async () => {
+    try {
+      const _id = _get(props, "notes.selectedId");
+      await deleteSingleNote(_id);
+      await fetchNotesAndUpdateStore(props);
+      history.navigate("/");
+    } catch (error) {}
   };
 
   return (
