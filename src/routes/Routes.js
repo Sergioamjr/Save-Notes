@@ -7,9 +7,8 @@ import {
 } from "@reach/router";
 import createHashSource from "hash-source";
 import PageWrapper from "../templates/PageWrapper";
-import { getAllNotes } from "../services/notes";
 import { connect } from "react-redux";
-import { SetNoteList } from "./../store/notes";
+import { fetchNotesAndUpdateStore } from "../utils/app";
 
 let source = createHashSource();
 export let history = createHistory(source);
@@ -26,20 +25,7 @@ const Loading = () => (
 
 const AppRouter = props => {
   React.useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const { response } = await getAllNotes();
-        const responseFormatted = response.map(item => {
-          const { data } = item;
-          return {
-            ...item,
-            data: JSON.parse(data)
-          };
-        });
-        props.dispatch(SetNoteList(responseFormatted));
-      } catch (error) {}
-    };
-    fetchNotes();
+    fetchNotesAndUpdateStore(props);
   }, [props]);
 
   return (
