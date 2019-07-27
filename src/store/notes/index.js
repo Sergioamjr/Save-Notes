@@ -7,6 +7,7 @@ const SET_QUERYING_AS_TRUE = "SET_QUERYING_AS_TRUE";
 const SET_QUERYING_AS_FALSE = "SET_QUERYING_AS_FALSE";
 const SET_SWITCH_AS_TRUE = "SET_SWITCH_AS_TRUE";
 const REMOVE_NOTE_FROM_LIST = "REMOVE_NOTE_FROM_LIST";
+const ADD_NOTE_IN_LIST = "ADD_NOTE_IN_LIST";
 
 export default function reducer(state = notes, action) {
   const { type, payload } = action;
@@ -26,6 +27,8 @@ export default function reducer(state = notes, action) {
         ...state,
         list: state.list.filter(({ id }) => id.toString() !== payload)
       };
+    case ADD_NOTE_IN_LIST:
+      return { ...state, list: state.list.concat(payload) };
     default:
       return state;
   }
@@ -66,6 +69,13 @@ export function SetSwitchAsTrue() {
 export function RemoveNoteFromList(payload) {
   return {
     type: REMOVE_NOTE_FROM_LIST,
+    payload
+  };
+}
+
+export function AddNoteInList(payload) {
+  return {
+    type: ADD_NOTE_IN_LIST,
     payload
   };
 }
