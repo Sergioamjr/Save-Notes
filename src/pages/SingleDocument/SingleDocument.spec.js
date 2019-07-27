@@ -3,7 +3,10 @@ import { shallow } from "enzyme";
 import SingleDocument from "./SingleDocument";
 
 const mockProps = {
-  dispatch: jest.fn()
+  dispatch: jest.fn(),
+  notes: {
+    selectedId: 0
+  }
 };
 
 describe("<SingleDocument />", () => {
@@ -17,6 +20,7 @@ describe("<SingleDocument />", () => {
     wrapper.instance().componentDidMount();
     expect(wrapper.instance().updateSelectedId).toHaveBeenCalledTimes(1);
   });
+
   it("should update store on componentdidupdate", () => {
     const wrapper = shallow(<SingleDocument {...mockProps} />);
     jest.spyOn(wrapper.instance(), "updateSelectedId");

@@ -10,7 +10,7 @@ class NewDocument extends React.Component {
         {
           type: "header",
           data: {
-            text: "",
+            text: "1231",
             level: 1
           }
         }
