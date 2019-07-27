@@ -10,12 +10,11 @@ class NewDocument extends React.Component {
         {
           type: "header",
           data: {
-            text: "Título do novo documento",
+            text: "",
             level: 1
           }
         }
-      ],
-      version: "2.12.4"
+      ]
     }
   };
 
