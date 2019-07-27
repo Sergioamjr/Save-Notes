@@ -1,0 +1,67 @@
+@import "./variables.scss";
+
+.btn {
+  padding: 10px 20px;
+  font-size: 12px;
+  cursor: pointer;
+  color: $white;
+  height: 64px;
+  font-weight: bold;
+  width: 100%;
+  background: $theme;
+  border: 0;
+  transition: background ease 0.2s;
+  &:hover {
+    background: $themeDark;
+  }
+  &-second {
+    background: $white;
+    color: $black;
+    &:hover {
+      background: darken($white, 10%);
+    }
+  }
+  &-danger {
+    background: $danger;
+    color: $white;
+    &:hover {
+      background: darken($danger, 10%);
+    }
+  }
+
+  &-success {
+    background: $success;
+    color: $white;
+    &:hover {
+      background: darken($success, 10%);
+    }
+  }
+  &-small {
+    padding: 5px 10px;
+    height: 48px;
+    // width: auto;
+  }
+  &-icon {
+    padding: 10px;
+  }
+
+  &-circle {
+    border-radius: 50%;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+  }
+  &-noborder {
+    border-radius: 0;
+  }
+  &-disabled {
+    opacity: 0.5;
+  }
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
