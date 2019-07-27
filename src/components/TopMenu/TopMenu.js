@@ -31,7 +31,7 @@ const TopMenu = props => {
   return (
     <div className="d-flex d-flex-space-between d-flex-align-center m-bottom-40">
       <div
-        className={`d-flex d-flex-align-center ${
+        className={`d-flex  d-flex-align-center ${
           props.hasFoundNote ? "min-w-310" : ""
         }`}
       >
@@ -45,6 +45,11 @@ const TopMenu = props => {
         ) : (
           <span />
         )}
+      </div>
+      <div className="toggle-menu">
+        <Button className="btn m-right-10" onClick={props.toggleMenuHandler}>
+          Menu
+        </Button>
       </div>
     </div>
   );
