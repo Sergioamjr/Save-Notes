@@ -1,11 +1,14 @@
 import React from "react";
 import Button from "../Button/Button";
+import { Link } from "@reach/router";
 
 const TopMenu = () => {
   return (
     <div className="d-flex d-flex-space-between d-flex-align-center m-bottom-40">
       <div>
-        <Button>Novo Documento</Button>
+        <Link to="/novo-documento">
+          <Button>Novo Documento</Button>
+        </Link>
       </div>
       <ul>
         <li>
