@@ -5,16 +5,16 @@ import _get from "lodash/get";
 
 class SingleDocument extends React.Component {
   componentDidMount = () => {
-    this.UpdateSelectedId();
+    this.updateSelectedId();
   };
 
   componentDidUpdate = prevProps => {
     if (prevProps.id !== this.props.id) {
-      this.UpdateSelectedId();
+      this.updateSelectedId();
     }
   };
 
-  UpdateSelectedId = () => {
+  updateSelectedId = () => {
     const id = _get(this.props, "id");
     this.props.dispatch(SetSelectedId(id));
   };
