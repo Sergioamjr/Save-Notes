@@ -1,46 +1,54 @@
 import React from "react";
+import NotesItem from "../NotesItem";
+import _get from "lodash/get";
+import Button from "../Button";
+import { AddNoteInList } from "../../store/notes/index";
+import { history } from "../../routes/Routes";
 
-const Sidebar = () => {
+const NoteFactoty = dateTime => {
+  return {
+    titulo: `${dateTime}`,
+    data: {
+      time: dateTime,
+      blocks: [
+        {
+          type: "header",
+          data: {
+            text: `text ${dateTime}`,
+            level: 1
+          }
+        }
+      ]
+    },
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et sollicitudin sem, sit amet semper neque. Aliquam mi dui, ultrices sit amet leo in, vulputate dignissim lorem",
+    date: dateTime,
+    id: dateTime
+  };
+};
+
+const Sidebar = props => {
+  const list = _get(props, "notes.list", []);
+  const canSwitchNote = _get(props, "notes.canSwitchNote");
+
+  const addNoteInListHandler = () => {
+    const dateTime = new Date().getTime();
+    const data = NoteFactoty(dateTime);
+    props.dispatch(AddNoteInList(data));
+    history.navigate(`/documento/${dateTime}`);
+  };
   return (
-    <aside className="background-theme ">
-      <h1 className="p-10 color-white fs-5 m-bottom-20">MyNotes</h1>
+    <aside className="background-theme  ">
+      <h1 className="p-10 color-white fs-5 m-bottom-10 m-top-20">MyNotes</h1>
       <div>
-        <div className="m-bottom-10 p-10 p-bottom-20 bb-lightdarken">
-          <h2 className="color-white fs-6 m-bottom-10 tt-uppercase">Titulo</h2>
-          <p className="color-white m-bottom-10">
-            ac convallis velit lacus sit amet ligula. Duis scelerisque ligula
-            sed sem ullamcorper lacinia. Proin mollis dui quis nibh tempus
-            accumsan.
-          </p>
-          <p className="color-white fs-8">Criado em: 10/05/2019</p>
-        </div>
-        <div className="m-bottom-10 p-10 p-bottom-20 bb-lightdarken">
-          <h2 className="color-white fs-6 m-bottom-10 tt-uppercase">Titulo</h2>
-          <p className="color-white m-bottom-10">
-            ac convallis velit lacus sit amet ligula. Duis scelerisque ligula
-            sed sem ullamcorper lacinia. Proin mollis dui quis nibh tempus
-            accumsan.
-          </p>
-          <p className="color-white fs-8">Criado em: 10/05/2019</p>
-        </div>
-        <div className="m-bottom-10 p-10 p-bottom-20 bb-lightdarken">
-          <h2 className="color-white fs-6 m-bottom-10 tt-uppercase">Titulo</h2>
-          <p className="color-white m-bottom-10">
-            ac convallis velit lacus sit amet ligula. Duis scelerisque ligula
-            sed sem ullamcorper lacinia. Proin mollis dui quis nibh tempus
-            accumsan.
-          </p>
-          <p className="color-white fs-8">Criado em: 10/05/2019</p>
-        </div>
-        <div className="m-bottom-10 p-10 p-bottom-20 bb-lightdarken">
-          <h2 className="color-white fs-6 m-bottom-10 tt-uppercase">Titulo</h2>
-          <p className="color-white m-bottom-10">
-            ac convallis velit lacus sit amet ligula. Duis scelerisque ligula
-            sed sem ullamcorper lacinia. Proin mollis dui quis nibh tempus
-            accumsan.
-          </p>
-          <p className="color-white fs-8">Criado em: 10/05/2019</p>
-        </div>
+        <Button onClick={addNoteInListHandler}>Novo Documento</Button>
+        {list.length === 0 && (
+          <p className="color-white p-10">Nenhum documento criado ainda.</p>
+        )}
+
+        {list.map((item, index) => (
+          <NotesItem disabledAll={canSwitchNote} key={index} {...item} />
+        ))}
       </div>
     </aside>
   );
