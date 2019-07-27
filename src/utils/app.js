@@ -1,16 +1,20 @@
 import { getAllNotes, addNote } from "../services/notes";
 import { SetNoteList } from "../store/notes/index";
 
+export const formatNote = response => {
+  return response.map(item => {
+    const { data } = item;
+    return {
+      ...item,
+      data: JSON.parse(data)
+    };
+  });
+};
+
 export const fetchNotesAndUpdateStore = async props => {
   try {
     const { response } = await getAllNotes();
-    const responseFormatted = response.map(item => {
-      const { data } = item;
-      return {
-        ...item,
-        data: JSON.parse(data)
-      };
-    });
+    const responseFormatted = formatNote(response);
     props.dispatch(SetNoteList(responseFormatted));
   } catch (error) {}
 };

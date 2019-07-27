@@ -8,6 +8,8 @@ import {
 } from "../../store/notes/index";
 import _get from "lodash/get";
 import TextEditor from "../../components/TextEditor";
+import { getSingleNote } from "../../services/notes";
+import { formatNote } from "../../utils/app";
 
 class SingleDocument extends React.Component {
   state = {
@@ -27,23 +29,30 @@ class SingleDocument extends React.Component {
     }
   };
 
-  updateStateNote = () => {
-    this.props.dispatch(SetQueryingAsTrue());
-    const selectedId = _get(this.props, "notes.selectedId");
-    const list = _get(this.props, "notes.list", []);
-    const [note] = list.filter(({ _id }) => _id === selectedId) || [{}];
-    this.setState(
-      {
-        note
-      },
-      () => {
-        this.props.dispatch(SetQueryingAsFalse());
-        const data = _get(note, "data", false);
-        if (!data) {
-          this.props.dispatch(SetSwitchAsTrue());
-        }
+  updateStateNote = async () => {
+    try {
+      this.props.dispatch(SetQueryingAsTrue());
+      const selectedId = _get(this.props, "notes.selectedId");
+      const { response } = await getSingleNote(selectedId);
+      if (!response) {
+        this.setState({
+          note: {}
+        });
+        this.props.dispatch(SetSwitchAsTrue());
       }
-    );
+      const [note] = formatNote([response]);
+      this.setState(
+        {
+          note
+        },
+        () => {
+          this.props.dispatch(SetQueryingAsFalse());
+          if (!response) {
+            this.props.dispatch(SetSwitchAsTrue());
+          }
+        }
+      );
+    } catch (error) {}
   };
 
   updateSelectedId = () => {
