@@ -1,8 +1,8 @@
 import React from "react";
 
-const Notes = props => {
+const NotesConnect = props => {
   const { Component, ...otherProps } = props;
   return <Component {...otherProps} />;
 };
 
-export default Notes;
+export default NotesConnect;

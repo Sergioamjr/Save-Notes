@@ -13,6 +13,8 @@ let history = createHistory(source);
 
 const NewDocument = lazy(() => import("./../pages/NewDocument"));
 const Home = lazy(() => import("./../pages/Home"));
+const SingleDocument = lazy(() => import("./../pages/SingleDocument"));
+
 const Loading = () => (
   <PageWrapper>
     <p>Loading</p>
@@ -26,6 +28,7 @@ const AppRouter = () => {
         <Suspense fallback={<Loading />}>
           <Router>
             <NewDocument path="/novo-documento" />
+            <SingleDocument path="/documento/:id" />
             <Home path="/" />
             <Redirect default from="/" noThrow to="/" />
           </Router>
