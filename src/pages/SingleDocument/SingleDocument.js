@@ -66,7 +66,9 @@ class SingleDocument extends React.Component {
   render() {
     const data = _get(this.state, "note.data", false);
     return (
-      <PageWrapper>
+      <PageWrapper
+        hasFoundNote={!this.props.notes.canSwitchNote ? false : data}
+      >
         <div>
           {data && !this.props.notes.isQuerying && (
             <TextEditor onChange={this.onChange} data={data} />

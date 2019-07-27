@@ -9,7 +9,7 @@ import createHashSource from "hash-source";
 import PageWrapper from "../templates/PageWrapper";
 
 let source = createHashSource();
-let history = createHistory(source);
+export let history = createHistory(source);
 
 const NewDocument = lazy(() => import("./../pages/NewDocument"));
 const Home = lazy(() => import("./../pages/Home"));

@@ -22,7 +22,10 @@ export default function reducer(state = notes, action) {
     case SET_SWITCH_AS_TRUE:
       return { ...state, canSwitchNote: true };
     case REMOVE_NOTE_FROM_LIST:
-      return { ...state, list: state.list.filter(({ id }) => id !== payload) };
+      return {
+        ...state,
+        list: state.list.filter(({ id }) => id.toString() !== payload)
+      };
     default:
       return state;
   }

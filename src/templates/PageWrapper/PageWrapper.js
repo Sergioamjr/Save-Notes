@@ -3,13 +3,13 @@ import Sidebar from "../../components/Sidebar";
 import TopMenu from "../../components/TopMenu";
 import Notes from "../../containers/Notes";
 
-const PageWrapper = ({ children }) => {
+const PageWrapper = ({ children, hasFoundNote }) => {
   return (
     <div>
       <div className="template-grid">
         <Notes Component={Sidebar} />
         <div className="p-20">
-          <TopMenu />
+          <Notes Component={TopMenu} hasFoundNote={hasFoundNote} />
           {children}
         </div>
       </div>
