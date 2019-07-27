@@ -119,7 +119,7 @@ export const defaultStore = {
         id: 1231277
       }
     ],
-    selected: null,
+    selectedId: null,
     isFetching: false,
     isSubmiting: false
   }
