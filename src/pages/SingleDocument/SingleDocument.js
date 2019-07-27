@@ -31,10 +31,7 @@ class SingleDocument extends React.Component {
     this.props.dispatch(SetQueryingAsTrue());
     const selectedId = _get(this.props, "notes.selectedId");
     const list = _get(this.props, "notes.list", []);
-    const [note] = list.filter(({ id }) => id.toString() === selectedId) || [
-      {}
-    ];
-
+    const [note] = list.filter(({ _id }) => _id === selectedId) || [{}];
     this.setState(
       {
         note

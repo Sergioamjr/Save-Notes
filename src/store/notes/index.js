@@ -25,7 +25,7 @@ export default function reducer(state = notes, action) {
     case REMOVE_NOTE_FROM_LIST:
       return {
         ...state,
-        list: state.list.filter(({ id }) => id.toString() !== payload)
+        list: state.list.filter(({ _id }) => _id.toString() !== payload)
       };
     case ADD_NOTE_IN_LIST:
       return { ...state, list: state.list.concat(payload) };
