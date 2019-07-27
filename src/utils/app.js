@@ -38,7 +38,7 @@ export const formatAndCreateNewNote = async fn => {
         ]
       }),
       date: new Date(),
-      titulo: "Novo documento"
+      titulo: "Nova nota"
     };
 
     const response = await addNote(data);

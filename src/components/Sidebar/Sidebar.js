@@ -13,11 +13,13 @@ const Sidebar = props => {
         props.isMenuOpened ? "mobile-menu-actived" : ""
       }`}
     >
-      <h1 className="p-10 color-white fs-5 m-bottom-10 m-top-20">MyNotes</h1>
+      <h1 className="p-10 color-white fs-5 m-bottom-10 m-top-20">
+        My Save Notes
+      </h1>
       <div>
         {list.length === 0 && (
           <p className="color-white p-10 p-center">
-            Nenhum documento criado ainda.
+            Nenhuma nota criada ainda.
           </p>
         )}
 

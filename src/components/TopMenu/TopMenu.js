@@ -36,11 +36,11 @@ const TopMenu = props => {
         }`}
       >
         <Button className="btn m-right-10" onClick={addNoteInListHandler}>
-          Criar Documento
+          Criar Nota
         </Button>
         {props.hasFoundNote ? (
           <Button className="btn btn-danger" onClick={removeItemHandler}>
-            Excluir Documento
+            Excluir Nota
           </Button>
         ) : (
           <span />

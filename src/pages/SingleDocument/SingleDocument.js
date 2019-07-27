@@ -106,7 +106,7 @@ class SingleDocument extends React.Component {
           )}
 
           {!data && !this.state.isQuering && this.props.notes.canSwitchNote && (
-            <Feedback text=" Documento não encontrado." mood="sad" />
+            <Feedback text=" Nota não encontrada." mood="sad" />
           )}
         </div>
       </PageWrapper>
