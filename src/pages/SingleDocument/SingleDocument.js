@@ -8,9 +8,16 @@ import {
 } from "../../store/notes/index";
 import _get from "lodash/get";
 import TextEditor from "../../components/TextEditor";
+import { getSingleNote, updateNote } from "../../services/notes";
+import {
+  formatNote,
+  getAndUpdateTitle,
+  fetchNotesAndUpdateStore
+} from "../../utils/app";
 
 class SingleDocument extends React.Component {
   state = {
+    prevVersion: {},
     note: {}
   };
 
@@ -18,7 +25,7 @@ class SingleDocument extends React.Component {
     this.updateSelectedId();
   };
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.id !== this.props.id) {
       this.updateSelectedId();
     }
@@ -27,26 +34,45 @@ class SingleDocument extends React.Component {
     }
   };
 
-  updateStateNote = () => {
-    this.props.dispatch(SetQueryingAsTrue());
-    const selectedId = _get(this.props, "notes.selectedId");
-    const list = _get(this.props, "notes.list", []);
-    const [note] = list.filter(({ id }) => id.toString() === selectedId) || [
-      {}
-    ];
+  updateNote = async () => {
+    try {
+      const titulo = getAndUpdateTitle(this.state);
+      const note = _get(this.state, "note", false);
+      const { data } = note;
+      await updateNote({
+        ...note,
+        data: JSON.stringify(data),
+        titulo
+      });
+      await fetchNotesAndUpdateStore(this.props);
+    } catch (error) {}
+  };
 
-    this.setState(
-      {
-        note
-      },
-      () => {
-        this.props.dispatch(SetQueryingAsFalse());
-        const data = _get(note, "data", false);
-        if (!data) {
-          this.props.dispatch(SetSwitchAsTrue());
-        }
+  updateStateNote = async () => {
+    try {
+      this.props.dispatch(SetQueryingAsTrue());
+      const selectedId = _get(this.props, "notes.selectedId");
+      const { response } = await getSingleNote(selectedId);
+      if (!response) {
+        this.setState({
+          note: {}
+        });
+        this.props.dispatch(SetSwitchAsTrue());
       }
-    );
+      const [note] = formatNote([response]);
+      this.setState(
+        {
+          note,
+          prevVersion: note
+        },
+        () => {
+          this.props.dispatch(SetQueryingAsFalse());
+          if (!response) {
+            this.props.dispatch(SetSwitchAsTrue());
+          }
+        }
+      );
+    } catch (error) {}
   };
 
   updateSelectedId = () => {
@@ -55,12 +81,15 @@ class SingleDocument extends React.Component {
   };
 
   onChange = data => {
-    this.setState({
-      note: {
-        ...this.state.note,
-        data
-      }
-    });
+    this.setState(
+      {
+        note: {
+          ...this.state.note,
+          data
+        }
+      },
+      this.updateNote
+    );
   };
 
   render() {

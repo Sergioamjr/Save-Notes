@@ -2,40 +2,24 @@ import React from "react";
 import NotesItem from "../NotesItem";
 import _get from "lodash/get";
 import Button from "../Button";
-import { AddNoteInList } from "../../store/notes/index";
+import {
+  formatAndCreateNewNote,
+  fetchNotesAndUpdateStore
+} from "../../utils/app";
 import { history } from "../../routes/Routes";
-
-const NoteFactoty = dateTime => {
-  return {
-    titulo: `${dateTime}`,
-    data: {
-      time: dateTime,
-      blocks: [
-        {
-          type: "header",
-          data: {
-            text: `text ${dateTime}`,
-            level: 1
-          }
-        }
-      ]
-    },
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et sollicitudin sem, sit amet semper neque. Aliquam mi dui, ultrices sit amet leo in, vulputate dignissim lorem",
-    date: dateTime,
-    id: dateTime
-  };
-};
 
 const Sidebar = props => {
   const list = _get(props, "notes.list", []);
   const canSwitchNote = _get(props, "notes.canSwitchNote");
 
   const addNoteInListHandler = () => {
-    const dateTime = new Date().getTime();
-    const data = NoteFactoty(dateTime);
-    props.dispatch(AddNoteInList(data));
-    history.navigate(`/documento/${dateTime}`);
+    formatAndCreateNewNote(async response => {
+      try {
+        await fetchNotesAndUpdateStore(props);
+        const _id = _get(response, "document._id");
+        history.navigate(`/documento/${_id}`);
+      } catch (error) {}
+    });
   };
   return (
     <aside className="background-theme  ">

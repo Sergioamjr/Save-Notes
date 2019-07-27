@@ -7,6 +7,8 @@ import {
 } from "@reach/router";
 import createHashSource from "hash-source";
 import PageWrapper from "../templates/PageWrapper";
+import { connect } from "react-redux";
+import { fetchNotesAndUpdateStore } from "../utils/app";
 
 let source = createHashSource();
 export let history = createHistory(source);
@@ -21,7 +23,11 @@ const Loading = () => (
   </PageWrapper>
 );
 
-const AppRouter = () => {
+const AppRouter = props => {
+  React.useEffect(() => {
+    fetchNotesAndUpdateStore(props);
+  }, [props]);
+
   return (
     <div>
       <LocationProvider history={history}>
@@ -38,4 +44,4 @@ const AppRouter = () => {
   );
 };
 
-export default AppRouter;
+export default connect()(AppRouter);
