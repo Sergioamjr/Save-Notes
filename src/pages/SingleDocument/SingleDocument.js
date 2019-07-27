@@ -3,7 +3,8 @@ import PageWrapper from "../../templates/PageWrapper";
 import {
   SetSelectedId,
   SetQueryingAsTrue,
-  SetQueryingAsFalse
+  SetQueryingAsFalse,
+  SetSwitchAsTrue
 } from "../../store/notes/index";
 import _get from "lodash/get";
 import TextEditor from "../../components/TextEditor";
@@ -40,6 +41,10 @@ class SingleDocument extends React.Component {
       },
       () => {
         this.props.dispatch(SetQueryingAsFalse());
+        const data = _get(note, "data", false);
+        if (!data) {
+          this.props.dispatch(SetSwitchAsTrue());
+        }
       }
     );
   };
@@ -67,7 +72,7 @@ class SingleDocument extends React.Component {
             <TextEditor onChange={this.onChange} data={data} />
           )}
 
-          {!data && !this.state.isQuering && <p>Documet não encontrado.</p>}
+          {!data && !this.state.isQuering && <p>Documento não encontrado.</p>}
         </div>
       </PageWrapper>
     );

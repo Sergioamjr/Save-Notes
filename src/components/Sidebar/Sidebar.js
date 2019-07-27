@@ -5,7 +5,6 @@ import _get from "lodash/get";
 const Sidebar = props => {
   const list = _get(props, "notes.list", []);
   const canSwitchNote = _get(props, "notes.canSwitchNote");
-  console.log(canSwitchNote);
   return (
     <aside className="background-theme  ">
       <h1 className="p-10 color-white fs-5 m-bottom-10 m-top-20">MyNotes</h1>
