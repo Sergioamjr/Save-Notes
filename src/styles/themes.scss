@@ -1,29 +1,6 @@
 @import "./variables.scss";
-
-.content_ {
-  p {
-    margin-bottom: 15px;
-    line-height: 26px;
-    font-size: 18px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-  a {
-    color: blue;
-    text-decoration: underline;
-  }
-}
-
-.fs-custom {
-  font-family: "Open Sans", sans-serif;
-}
-
-.image-preview {
-  height: 200px;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 2px;
+.float-buttons {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
 }

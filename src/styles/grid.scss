@@ -11,8 +11,8 @@
 
 .template-grid {
   display: grid;
-  grid-template-columns: 300px auto;
-  height: calc(100vh - 64px);
+  grid-template-columns: 400px auto;
+  height: 100vh;
 }
 
 /* Função que gera as classes, recebe dois parâmetros;

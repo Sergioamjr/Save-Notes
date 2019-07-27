@@ -1,13 +1,16 @@
 import React from "react";
-import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import TopMenu from "../../components/TopMenu";
 
 const PageWrapper = ({ children }) => {
   return (
     <div>
-      <Header />
       <div className="template-grid">
-        <div className="background-gray">SideBar</div>
-        <div className="p-20">{children}</div>
+        <Sidebar />
+        <div className="p-20">
+          <TopMenu />
+          {children}
+        </div>
       </div>
     </div>
   );

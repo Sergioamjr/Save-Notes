@@ -1,11 +1,11 @@
 @import "./variables.scss";
 
 .btn {
-  padding: 10px 20px;
-  font-size: 12px;
+  padding: 10px 10px;
+  font-size: 14px;
+  border-radius: 4px;
   cursor: pointer;
   color: $white;
-  height: 64px;
   font-weight: bold;
   width: 100%;
   background: $theme;
