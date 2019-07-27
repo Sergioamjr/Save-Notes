@@ -1,5 +1,8 @@
 import axios from "axios";
-const BACKEND = process.env.REACT_APP_BACKEND;
+const DEV = process.env.REACT_APP_BACKEND_DEV;
+const PROD = process.env.REACT_APP_BACKEND_PROD;
+
+const BACKEND = /localhost/.test(window.location.hostname) ? DEV : PROD;
 
 function formatResponse(response = {}) {
   const { data } = response;
