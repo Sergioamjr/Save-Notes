@@ -8,11 +8,16 @@ import {
 } from "../../store/notes/index";
 import _get from "lodash/get";
 import TextEditor from "../../components/TextEditor";
-import { getSingleNote } from "../../services/notes";
-import { formatNote } from "../../utils/app";
+import { getSingleNote, updateNote } from "../../services/notes";
+import {
+  formatNote,
+  getAndUpdateTitle,
+  fetchNotesAndUpdateStore
+} from "../../utils/app";
 
 class SingleDocument extends React.Component {
   state = {
+    prevVersion: {},
     note: {}
   };
 
@@ -20,13 +25,27 @@ class SingleDocument extends React.Component {
     this.updateSelectedId();
   };
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.id !== this.props.id) {
       this.updateSelectedId();
     }
     if (prevProps.notes.selectedId !== this.props.notes.selectedId) {
       this.updateStateNote();
     }
+  };
+
+  updateNote = async () => {
+    try {
+      const titulo = getAndUpdateTitle(this.state);
+      const note = _get(this.state, "note", false);
+      const { data } = note;
+      await updateNote({
+        ...note,
+        data: JSON.stringify(data),
+        titulo
+      });
+      await fetchNotesAndUpdateStore(this.props);
+    } catch (error) {}
   };
 
   updateStateNote = async () => {
@@ -43,7 +62,8 @@ class SingleDocument extends React.Component {
       const [note] = formatNote([response]);
       this.setState(
         {
-          note
+          note,
+          prevVersion: note
         },
         () => {
           this.props.dispatch(SetQueryingAsFalse());
@@ -61,12 +81,15 @@ class SingleDocument extends React.Component {
   };
 
   onChange = data => {
-    this.setState({
-      note: {
-        ...this.state.note,
-        data
-      }
-    });
+    this.setState(
+      {
+        note: {
+          ...this.state.note,
+          data
+        }
+      },
+      this.updateNote
+    );
   };
 
   render() {

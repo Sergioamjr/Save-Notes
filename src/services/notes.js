@@ -13,7 +13,7 @@ export const addNote = async params => {
 };
 
 export const updateNote = async params => {
-  return await RequestFactory(`update-note`, { params }, "patch");
+  return await RequestFactory(`update-note`, params, "patch");
 };
 
 export const deleteSingleNote = async _id => {
