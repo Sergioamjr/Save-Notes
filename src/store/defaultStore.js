@@ -46,6 +46,7 @@ export const defaultStore = {
     selectedId: null,
     isFetching: false,
     isSubmiting: false,
-    isQuerying: false
+    isQuerying: false,
+    canSwitchNote: true,
   }
 };

@@ -1,10 +1,16 @@
 import React from "react";
 import Editor from "@stfy/react-editor.js";
+import { SetSwitchAsTrue } from "../../store/notes/index";
+import { connect } from "react-redux";
 
 const TextEditor = props => {
   return (
     <Editor
-      onReady={() => {}}
+      onReady={() => {
+        setTimeout(() => {
+          props.dispatch(SetSwitchAsTrue());
+        }, 500);
+      }}
       autofocus
       holderId="editorjs-wrapper"
       {...props}
@@ -12,4 +18,4 @@ const TextEditor = props => {
   );
 };
 
-export default TextEditor;
+export default connect()(TextEditor);

@@ -1,6 +1,6 @@
 import React from "react";
 import PageWrapper from "../../templates/PageWrapper";
-import TextEditor from "../../components/TextEditor ";
+import TextEditor from "../../components/TextEditor";
 
 class NewDocument extends React.Component {
   state = {
