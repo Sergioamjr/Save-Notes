@@ -1,32 +1,27 @@
 import React from "react";
-import { Editor, EditorState } from "draft-js";
-import "draft-js/dist/Draft.css";
+import Editor from "@stfy/react-editor.js";
 
-function MyEditor() {
-  const [editorState, setEditorState] = React.useState(
-    EditorState.createEmpty()
-  );
-
-  const editor = React.useRef(null);
-
-  function focusEditor() {
-    editor.current.focus();
-  }
-
-  React.useEffect(() => {
-    focusEditor();
-  }, []);
-
+const MyEditor = () => {
   return (
-    <div onClick={focusEditor}>
-      <Editor
-        ref={editor}
-        placeholder="Novo texto..."
-        editorState={editorState}
-        onChange={editorState => setEditorState(editorState)}
-      />
-    </div>
+    <Editor
+      autofocus
+      holderId="editorjs-container"
+      onChange={data => console.log(data)}
+      data={{
+        time: 1554920381017,
+        blocks: [
+          {
+            type: "header",
+            data: {
+              text: "Hello Editor.js",
+              level: 2
+            }
+          }
+        ],
+        version: "2.12.4"
+      }}
+    />
   );
-}
+};
 
 export default MyEditor;
