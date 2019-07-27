@@ -10,6 +10,7 @@ import PageWrapper from "../templates/PageWrapper";
 import { connect } from "react-redux";
 import { fetchNotesAndUpdateStore } from "../utils/app";
 import Feedback from "../components/Feedback/Feedback";
+import { getAuth, setAuth } from "../services/localStorage";
 
 let source = createHashSource();
 export let history = createHistory(source);
@@ -26,6 +27,12 @@ const Loading = () => (
 
 const AppRouter = props => {
   React.useEffect(() => {
+    const { userid } = getAuth();
+    if (!userid) {
+      setAuth({
+        userid: new Date().getTime()
+      });
+    }
     fetchNotesAndUpdateStore(props);
   }, [props]);
 

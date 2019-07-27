@@ -31,14 +31,14 @@ export const formatAndCreateNewNote = async fn => {
           {
             type: "header",
             data: {
-              text: `Título`,
+              text: ``,
               level: 1
             }
           }
         ]
       }),
       date: new Date(),
-      titulo: "Titulo"
+      titulo: "Novo documento"
     };
 
     const response = await addNote(data);
