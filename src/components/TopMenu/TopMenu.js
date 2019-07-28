@@ -38,17 +38,19 @@ const TopMenu = props => {
         <Button className="btn m-right-10" onClick={addNoteInListHandler}>
           Criar Nota
         </Button>
-        {props.hasFoundNote ? (
+        {props.hasFoundNote && (
           <Button className="btn btn-danger" onClick={removeItemHandler}>
             Excluir Nota
           </Button>
-        ) : (
-          <span />
         )}
       </div>
       <div className="toggle-menu">
-        <Button className="btn m-right-10" onClick={props.toggleMenuHandler}>
-          Menu
+        <Button
+          style={{ fontSize: "25px", padding: "6px", paddingTop: "0" }}
+          className="btn m-right-10"
+          onClick={props.toggleMenuHandler}
+        >
+          ≡
         </Button>
       </div>
     </div>

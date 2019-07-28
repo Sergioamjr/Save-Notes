@@ -13,9 +13,18 @@ const Sidebar = props => {
         props.isMenuOpened ? "mobile-menu-actived" : ""
       }`}
     >
-      <h1 className="p-10 color-white fs-5 m-bottom-10 m-top-20">
-        My Save Notes
-      </h1>
+      <div className="d-flex d-flex-align-center d-flex-space-between">
+        <h1 className="p-10 color-white fs-5 m-bottom-10 m-top-20">
+          My Save Notes
+        </h1>
+        <button
+          onClick={props.toggleMenuHandler}
+          style={{ fontSize: "25px", padding: "0px 6px 3px" }}
+          className="btn m-right-10 m-top-10"
+        >
+          ✕
+        </button>
+      </div>
       <div>
         {list.length === 0 && (
           <p className="color-white p-10 p-center">

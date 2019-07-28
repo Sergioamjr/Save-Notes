@@ -12,7 +12,11 @@ const PageWrapper = ({ children, hasFoundNote }) => {
   return (
     <div>
       <div className="template-grid overflow-hidden">
-        <Notes isMenuOpened={isMenuOpened} Component={Sidebar} />
+        <Notes
+          toggleMenuHandler={toggleMenuHandler}
+          isMenuOpened={isMenuOpened}
+          Component={Sidebar}
+        />
         <div className="p-20 overflow-auto">
           <Notes
             toggleMenuHandler={toggleMenuHandler}
