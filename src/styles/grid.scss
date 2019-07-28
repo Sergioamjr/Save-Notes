@@ -25,12 +25,16 @@
       left: 0%;
     }
   }
+
   .toggle-menu {
     display: block;
   }
 }
 
 @media screen and (min-width: $sm) {
+  .sm-min-w-310 {
+    min-width: 310px;
+  }
   .template-grid {
     display: grid;
     grid-template-columns: 300px auto;

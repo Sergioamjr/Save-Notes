@@ -32,7 +32,7 @@ const TopMenu = props => {
     <div className="d-flex d-flex-space-between d-flex-align-center m-bottom-40">
       <div
         className={`d-flex  d-flex-align-center ${
-          props.hasFoundNote ? "min-w-310" : ""
+          props.hasFoundNote ? "sm-min-w-310" : ""
         }`}
       >
         <Button className="btn m-right-10" onClick={addNoteInListHandler}>
@@ -46,11 +46,10 @@ const TopMenu = props => {
       </div>
       <div className="toggle-menu">
         <Button
-          style={{ fontSize: "25px", padding: "6px", paddingTop: "0" }}
-          className="btn m-right-10"
+          className="btn m-right-10 mobile-btn-menu"
           onClick={props.toggleMenuHandler}
         >
-          ≡
+          {props.isMenuOpened ? "✕" : "≡"}
         </Button>
       </div>
     </div>
