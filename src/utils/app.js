@@ -2,17 +2,17 @@ import { getAllNotes, addNote } from "../services/notes";
 import { SetNoteList } from "../store/notes/index";
 import _get from "lodash/get";
 
-export const formatNote = response => {
-  return response.map(item => {
+export const formatNote = (response) => {
+  return response.map((item) => {
     const { data } = item;
     return {
       ...item,
-      data: JSON.parse(data)
+      data: JSON.parse(data),
     };
   });
 };
 
-export const fetchNotesAndUpdateStore = async props => {
+export const fetchNotesAndUpdateStore = async (props) => {
   try {
     const { response } = await getAllNotes();
     const responseFormatted = formatNote(response);
@@ -20,7 +20,7 @@ export const fetchNotesAndUpdateStore = async props => {
   } catch (error) {}
 };
 
-export const formatAndCreateNewNote = async fn => {
+export const formatAndCreateNewNote = async (fn) => {
   try {
     const dateTime = new Date().getTime();
     const data = {
@@ -32,13 +32,13 @@ export const formatAndCreateNewNote = async fn => {
             type: "header",
             data: {
               text: ``,
-              level: 1
-            }
-          }
-        ]
+              level: 1,
+            },
+          },
+        ],
       }),
       date: new Date(),
-      titulo: "Nova nota"
+      titulo: "New note",
     };
 
     const response = await addNote(data);
@@ -46,7 +46,7 @@ export const formatAndCreateNewNote = async fn => {
   } catch (error) {}
 };
 
-export const getAndUpdateTitle = state => {
+export const getAndUpdateTitle = (state) => {
   let titulo = "Sem título";
   const data = _get(state, "note.data.blocks", false);
   if (data.length === 0) {
