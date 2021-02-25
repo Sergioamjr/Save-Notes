@@ -5,10 +5,10 @@ import { deleteSingleNote } from "../../services/notes";
 import _get from "lodash/get";
 import {
   fetchNotesAndUpdateStore,
-  formatAndCreateNewNote
+  formatAndCreateNewNote,
 } from "../../utils/app";
 
-const TopMenu = props => {
+const TopMenu = (props) => {
   const removeItemHandler = async () => {
     try {
       const _id = _get(props, "notes.selectedId");
@@ -19,7 +19,7 @@ const TopMenu = props => {
   };
 
   const addNoteInListHandler = () => {
-    formatAndCreateNewNote(async response => {
+    formatAndCreateNewNote(async (response) => {
       try {
         await fetchNotesAndUpdateStore(props);
         const _id = _get(response, "document._id");
@@ -36,11 +36,11 @@ const TopMenu = props => {
         }`}
       >
         <Button className="btn m-right-10" onClick={addNoteInListHandler}>
-          Criar Nota
+          Create note
         </Button>
         {props.hasFoundNote && (
           <Button className="btn btn-danger" onClick={removeItemHandler}>
-            Excluir Nota
+            Delete note
           </Button>
         )}
       </div>

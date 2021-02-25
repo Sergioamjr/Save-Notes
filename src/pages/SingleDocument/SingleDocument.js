@@ -4,7 +4,7 @@ import {
   SetSelectedId,
   SetQueryingAsTrue,
   SetQueryingAsFalse,
-  SetSwitchAsTrue
+  SetSwitchAsTrue,
 } from "../../store/notes/index";
 import _get from "lodash/get";
 import TextEditor from "../../components/TextEditor";
@@ -12,14 +12,14 @@ import { getSingleNote, updateNote } from "../../services/notes";
 import {
   formatNote,
   getAndUpdateTitle,
-  fetchNotesAndUpdateStore
+  fetchNotesAndUpdateStore,
 } from "../../utils/app";
 import Feedback from "../../components/Feedback";
 
 class SingleDocument extends React.Component {
   state = {
     prevVersion: {},
-    note: {}
+    note: {},
   };
 
   componentDidMount = () => {
@@ -43,7 +43,7 @@ class SingleDocument extends React.Component {
       await updateNote({
         ...note,
         data: JSON.stringify(data),
-        titulo
+        titulo,
       });
       await fetchNotesAndUpdateStore(this.props);
     } catch (error) {}
@@ -56,7 +56,7 @@ class SingleDocument extends React.Component {
       const { response } = await getSingleNote(selectedId);
       if (!response) {
         this.setState({
-          note: {}
+          note: {},
         });
         // this.props.dispatch(SetQueryingAsFalse());
         this.props.dispatch(SetSwitchAsTrue());
@@ -65,7 +65,7 @@ class SingleDocument extends React.Component {
       this.setState(
         {
           note,
-          prevVersion: note
+          prevVersion: note,
         },
         () => {
           this.props.dispatch(SetQueryingAsFalse());
@@ -82,13 +82,13 @@ class SingleDocument extends React.Component {
     this.props.dispatch(SetSelectedId(id));
   };
 
-  onChange = data => {
+  onChange = (data) => {
     this.setState(
       {
         note: {
           ...this.state.note,
-          data
-        }
+          data,
+        },
       },
       this.updateNote
     );
@@ -106,7 +106,7 @@ class SingleDocument extends React.Component {
           )}
 
           {!data && !this.state.isQuering && this.props.notes.canSwitchNote && (
-            <Feedback text=" Nota não encontrada." mood="sad" />
+            <Feedback text="This note doesn't exist." mood="sad" />
           )}
         </div>
       </PageWrapper>

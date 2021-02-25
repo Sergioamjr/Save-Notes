@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Link } from "@reach/router";
 
-const NotesItem = props => {
+const NotesItem = (props) => {
   const {
     titulo,
     description,
@@ -10,7 +10,7 @@ const NotesItem = props => {
     actived,
     _id,
     disabledAll,
-    lastModification
+    lastModification,
   } = props;
 
   return (
@@ -26,10 +26,10 @@ const NotesItem = props => {
           </h2>
           <p className="color-white m-bottom-10">{description}</p>
           <p className="color-white fs-8 m-bottom-5">
-            Criado em: {moment(date).format("DD/MM/YYYY")}
+            Created at: {moment(date).format("DD/MM/YYYY")}
           </p>
           <p className="color-white fs-8">
-            Última atualizacão:{" "}
+            Last update:{" "}
             {moment(lastModification).format("DD/MM/YYYY - hh:mm:ss")}
           </p>
         </div>
